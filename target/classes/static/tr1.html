@@ -1,0 +1,29 @@
+
+
+<html>
+<script src="https://code.jquery.com/jquery-3.2.0.js"></script>
+
+<label>Search query : </label>
+<input type="text" name="query" id="query"/>
+<button id="btns">butn</button>
+
+</html>
+
+<script>
+
+$(document).ready(function(){
+	$("#btns").on("click",function(){
+	var x  = document.getElementById("query").value;
+
+	$.ajax({
+				url: "http://localhost:8080/jsondata/"+x,
+				success:function(data){
+					console.log(data);
+				}	
+	});
+
+	});
+
+});
+
+</script>

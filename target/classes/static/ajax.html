@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$.ajax({
+	  url: '/jsondata',
+	  cache: true,
+	  dataType: 'script',
+	  success: function(){
+	    google.load('visualization', '1', {packages:['corechart'], 'callback' : function()
+	      {
+
+	            $.ajax({
+	                 type: "POST",
+	                 dataType: "json",
+	                 data: {id: YOURIDHERE},
+	                 url: '<?=URL?>' + '/jsondata',
+	                 success: function(jsondata) {
+	                    var data = google.visualization.arrayToDataTable(jsondata);
+
+	                    var options = {title: 'My Daily Activities'};
+
+	                    var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+	                    chart.draw(data, options);
+	                 }
+	            });    
+	        ]);
+
+	      }
+	    });
+	    return true;
+	  }
+	});
+</script>
+</head>
+
+</body>
+</html>

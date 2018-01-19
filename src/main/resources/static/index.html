@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Sentiment Analysis Tool</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/analysis.css">
+<script src="/js/jquery-1.11.3.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/login.js"></script>
+</head>
+
+
+
+
+
+	<div id="mainContainer" class="container" style="max-width: 700px"   >
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="text-center"><span class="glyphicon glyphicon-user "></span> Sentiment Analysis Tool</h3></div>
+				<div class="panel-body">
+					<h4><label class="label label-warning">Please enter valid credentials</label></h4>
+					<form id="loginForm" action="/login" method="post">
+						<div class="form-group">
+							<label for="userId" class="label label-info">User Id:</label> 
+							<input type="text" class="form-control" name="userId" id="userId" placeholder="Enter User Id">
+						</div>
+						<div class="form-group">
+							<label for="password" class="label label-info">Password:</label>
+							<input type="password" class="form-control" name="password" id="password" placeholder="Enter password">
+						</div>
+						<div class="form-group">
+							<button type="button" class="btn btn-info btn-block" id="loginBtn">Login</button>			
+						</div>
+						<div id="alertPanel" class="alert alert-warning">
+						  <strong>Warning!</strong> <span id="alertMessage"></span>
+						</div>
+					</form>
+				</div>	
+					
+		</div>		
+			
+	</div>
+	
+<nav class="navbar navbar-default navbar-fixed-bottom ">
+  <div class="container" style="max-width: 700px">
+    <div class="navbar-header">
+      <ul class="nav navbar-nav">
+		<li>
+ 	     <a class="navbar-brand" href="#" target="_blank">
+	        <span><img style="max-width:110px; margin-top: -1px;" src=""></span> &nbsp;&nbsp;&nbsp;<small>group59</small> <b>College</b><small> Name</small>
+	     </a>
+	     </li>
+       </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+	
+</body>
+</html>

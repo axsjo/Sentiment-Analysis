@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+<script src="https://code.jquery.com/jquery-3.2.0.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<title>Insert title here</title>
+</head>
+<body>
+<div id="mydata">
+
+
+division
+</div>
+ok working
+
+<button type="button" onclick="clicked()">
+click me
+</button>
+</body>
+<script>
+ 	
+		google.charts.load("current", {packages:["corechart"]});
+	    google.charts.setOnLoadCallback(drawChart);
+		function drawChart() {
+			var jsonData =$.ajax({
+				url: "http://localhost:8080/jsondata",
+				dataType:'json'}).done(function(result)			
+						{
+						var data = new google.visualization.DataTable();
+					      data.addColumn('string', 'Product');
+					      data.addColumn('number', 'Positive rating');
+					      data.addColumn('number', 'Negative rating');
+				    	  data.addColumn('number', 'Neutral rating');
+						}
+					console.log(results);
+				
+					results.forEach(function(packet) {
+			    	data.addRow([(packet.Product),parseFloat(packet.Positive),parseFloat(packet.Negative),parseFloat(packet.Neutral)]);
+			});
+				var optionsPieChart = {
+						  'legend':'labeled',
+						  'chartArea':{left:10,top:10,width:'100%',height:'100%'},
+						  'is3D':true,
+						  'width':'100%',
+						  'height':'100%'
+						}	;
+				var PieChart = new google.visualization.PieChart(document.getElementById('myPieChart'));	      		
+	      		PieChart.draw(data, optionsPieChart);
+		
+	});
+</script>
+
+</html>

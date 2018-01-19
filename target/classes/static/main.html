@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html>
+<title>Sentiment Analysis</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/dashboard.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+<body class="w3-light-grey">
+
+<!-- Top container -->
+<div class="w3-container w3-top w3-black w3-large w3-padding" style="z-index:4">
+  <button class="w3-btn w3-hide-large w3-padding-0 w3-hover-text-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+  <button type="button" class="btn btn-default btn-sm w3-right" value=>
+          <span class="glyphicon glyphicon-log-out"></span> Log out
+        </button>
+</div>
+
+<!-- Sidenav/menu -->
+<nav class="w3-sidenav w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidenav"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col s4">
+      <img src="/images/Welcome.png" class="w3-circle w3-margin-right" style="width:46px">
+    </div>
+    <div class="w3-col s8">
+      <span>Welcome, <strong>User</strong></span><br>
+      
+    </div>
+  </div>
+  <hr>
+  <div class="w3-container">
+    <h5><b>Sentiment Analysis</b></h5>
+  </div>
+  <a href="#" class="w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+  <a href="main.html" class="w3-padding w3-blue"><i class="fa fa-home fa-fw"></i>  Home</a>
+  <a href="Domains.html" class="w3-padding"><i class="fa fa-cloud fa-fw"></i>  Domains</a>
+  <a href="mobile.html" class="w3-padding"><i class="fa fa-mobile fa-fw"></i>  Mobiles</a>
+  <a href="laptop.html" class="w3-padding"><i class="fa fa-laptop fa-fw"></i>  Laptops</a>
+  <a href="movie.html" class="w3-padding"><i class="fa fa-globe fa-fw"></i>  Movies</a>
+ </nav>
+
+
+<!-- Overlay effect when opening sidenav on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+  <!-- Header -->
+  <header class="w3-container" style="padding-top:22px">
+    <h1><b><i class="fa fa-dashboard"></i>Sentiment Analysis</b></h1>
+  </header>
+
+	<div class="w3-half w3-padding">
+        <h2><b>What is Sentiment Analysis ?</b></h2>
+        <p style="font-size:160%;"> Sentiment Analysis is the process of determining whether a piece of writing is positive, negative or neutral. 
+        It’s also known as opinion mining, deriving the opinion or attitude of a speaker.Say you want to know if people on Twitter think that Chinese food in San Francisco is good or bad.
+Twitter sentiment analysis will answer this question. You can even learn why people think the food is good or bad, by extracting the exact words that indicate why people did or didn't like the food. 
+If too salty shows as a common theme, for example, you immediately have a better idea of why consumers aren’t happy.<p></div>
+
+	<div class="w3-half w3-padding" style="margin-top:82px;">
+		 <img width="650px" img src="/images/sentiment.png">
+	</div>
+	
+	<div class="w3-row">
+    <div class="w3-half">
+      <img width="650px" img src="/images/sentiment1.png">
+    </div>
+    <div class="w3-half w3-padding" style="margin-top:82px;">
+    <p style="font-size:160%;"><b>A common use case for this technology is to discover how people feel about a particular topic.</p>
+    <ul>
+    		<li style="font-size:160%;"><b>We can determine what people feel about a particular thing</b> </li>
+    		<li style="font-size:160%;"><b>Helpful in determining their likes and opinions about certain specific things</b></li>
+    		<li style="font-size:160%;"><b>Data from Sentiment Analysis can be applied to a wide range of fields in commercial as well as personal purposes</b></li>
+    
+    </ul>
+    
+    </div>
+    
+	</div>
+ </div>
+   
+    
+  <!-- End page content -->
+
+
+<script>
+// Get the Sidenav
+var mySidenav = document.getElementById("mySidenav");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidenav, and add overlay effect
+function w3_open() {
+    if (mySidenav.style.display === 'block') {
+        mySidenav.style.display = 'none';
+        overlayBg.style.display = "none";
+    } else {
+        mySidenav.style.display = 'block';
+        overlayBg.style.display = "block";
+    }
+}
+
+// Close the sidenav with the close button
+function w3_close() {
+    mySidenav.style.display = "none";
+    overlayBg.style.display = "none";
+}
+</script>
+
+</body>
+</html>

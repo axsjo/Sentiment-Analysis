@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+<script
+    src="https://code.jquery.com/jquery-3.2.0.js"
+></script>
+<title>Insert title here</title>
+</head>
+<body>
+<div id="mydata">
+
+
+division
+</div>
+ok working
+
+<button type="button" onclick="clicked()">
+click me
+</button>
+</body>
+<script>
+
+	var x;
+	function clicked(){
+			console.log("data function entered");
+		$.ajax({
+		
+			url: "http://localhost:8080/jsondata", success: function(result){
+			    console.log(result);   
+				x = result;
+				x = jQuery.parseJSON(result);
+			}
+			
+		});
+		
+	}
+
+</script>
+
+</html>

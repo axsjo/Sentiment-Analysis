@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.2.0.js"></script>
+<body>
+<label>search by :</label>
+<div id="head">
+	<select name="headselect" id="hdselect">
+	
+	<option>A</option>
+	<option>B</option>
+	<option>C</option>
+	</select>
+</div>
+
+<div id="subsection">
+
+</div>
+
+</body>
+<script>
+
+	console.log('there');
+	$(document).ready(function(){
+	$('hdselect').on('click',function(){
+		
+		var x = document.getElementById("hdselect").value();
+		console.log(x);
+		if(x==="A"){
+			console.log("Added to subsection");
+		}
+		
+	})});
+</script>
+
+</html>

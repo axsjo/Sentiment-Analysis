@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<title>Sentiment Analysis</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+ <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script> 
+ <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+ <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+ <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+ <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/dashboard.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.2.0.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+
+
+#w3-twothird {
+    position: relative;
+    padding-bottom: 100%;
+    height: 0;
+    overflow:hidden;
+}
+
+#mydata {
+    position: relative;
+    top: 500;
+    left: 1000;
+    width:70%;
+    height:20%;
+}
+#mydata1 {
+    position: relative;
+    top: 500;
+    left: 1000;
+    width:70%;
+    height:20%;
+}
+
+#lol {
+    position: relative;
+    top: 500;
+    left: 1000;
+    width:20%;
+    height:20%;
+}
+
+</style>
+
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+<style>#mydata {
+    position: relative;
+    top: 500;
+    left: 1000;
+    width:95%;
+    height:60%;
+}
+</style>
+
+                      <script>
+
+$(document).ready(function() {
+
+		google.charts.load("current", {packages:["corechart"]});
+	    
+		google.charts.setOnLoadCallback(drawChart);	
+		
+		$(window).on("throttledresize", function (event) {
+		    initChart();
+		});	
+
+		$("#btns").on("click",function(){
+			
+				drawChart();
+		
+			});
+		
+	    function drawChart() {
+			
+	    	var x  = document.getElementById("query").value;
+	    	var jsonData =$.ajax({
+				url: "http://localhost:8080/jsondata/"+x,								
+				dataType:'json'}).done(function(results)			
+				{
+						var data = new   google.visualization.DataTable();
+					      data.addColumn('string', 'List<Reportdata>');
+					      data.addColumn('number', 'ratings1');
+					     // data.addColumn('number', 'Negativerating');
+				    	 //data.addColumn('number', 'Neutral rating');
+						
+					console.log(results);
+				/*
+					results.forEach(function(packet) {
+			    	data.addRow([(packet.Reportdata),parseFloat(packet.ratings1)]);
+			    	console.log(packet.Reportdata);
+			    	console.log(packet.ratings1);
+			    	
+					});
+				*/	
+					data.addRow(['Positive',results[0].ratings1]);
+					data.addRow(['Negative',results[0].ratings2]);
+					data.addRow(['Neutral',results[0].ratings3]);
+					//data.addRow(['A5',23]);
+					
+					var Pieoptions = {
+							  'legend':'labeled',
+							  'backgroundColor': { fill:'transparent' },
+							  'title':'Sentiment Analysis of '+x,
+							  'is3D':true,
+							  'width':600,
+							  'height':350,
+							  
+							}
+				
+				var Baroptions = {
+						  'legend':'labeled',
+						  'backgroundColor': { fill:'transparent' },
+						  'title':'Sentiment Analysis of '+x,
+						  'is3D':true,
+						  'width':500,
+						  'height':350,
+						  colors: ['yellow']
+						}					
+					var PieChart = new google.visualization.PieChart(document.getElementById('chart_div'));	      		
+	      			PieChart.draw(data, Pieoptions);
+	      			
+	      			var BarChart = new google.visualization.BarChart(document.getElementById('chart_div1'));	      		
+	      			BarChart.draw(data, Baroptions);
+	      				
+	      			
+				});
+		}	
+		
+});
+</script>
+
+<script>
+
+$(document).ready(function() {
+
+	google.charts.load("current", {packages:["corechart"]});
+    
+	google.charts.setOnLoadCallback(drawChart);
+	
+    function drawChart() {
+		var jsonData =$.ajax({
+			url: "http://localhost:8080/jsondata/google pixel",
+			//data:'name=abc'
+			dataType:'json'}).done(function(results)			
+			{
+					var data = new   google.visualization.DataTable();
+				      data.addColumn('string', 'Reportdata');
+				      data.addColumn('number', 'ratings');
+				      //data.addColumn('number', 'Negativerating');
+			    	 // data.addColumn('number', 'Neutral rating');
+					
+				console.log(results);
+			/*
+				results.forEach(function(packet) {
+		    	data.addRow([(packet.Reportdata),parseFloat(packet.ratings1)]);
+		    	console.log(packet.Reportdata);
+		    	console.log(packet.ratings1);
+		    	
+				});
+			*/	
+			data.addRow(['Positive',results[0].ratings1]);
+			data.addRow(['Negative',results[0].ratings2]);
+			data.addRow(['Neutral',results[0].ratings3]);
+				//data.addRow(['A5',23]);
+				
+				var Pieoptions = {
+							  'legend':'labeled',
+							  'backgroundColor': { fill:'transparent' },
+							  'title':'Analysis of Google Pixel',
+							  'is3D':true,
+							  'width':700,
+							  'height':350,
+							  
+							}
+				
+				var Baroptions = {
+						  'legend':'labeled',
+						  'backgroundColor': { fill:'transparent' },
+						  'title':'Analysis of Google Pixel',
+						  'is3D':true,
+						  'width':700,
+						  'height':350,
+						  colors: ['yellow']
+						
+						  
+						}
+				
+				
+				var PieChart = new google.visualization.PieChart(document.getElementById('mydata'));	      		
+      			PieChart.draw(data, Pieoptions);
+      			
+      			var BarChart = new google.visualization.BarChart(document.getElementById('mydata1'));	      		
+      			BarChart.draw(data, Baroptions);
+      			
+      			});
+	}	
+	
+});
+</script>
+
+
+
+
+<body class="w3-light-grey">
+
+<!-- Top container -->
+<div class="w3-container w3-top w3-black w3-large w3-padding" style="z-index:4">
+  <button class="w3-btn w3-hide-large w3-padding-0 w3-hover-text-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+  <button type="button" class="btn btn-default btn-sm w3-right">
+          <span class="glyphicon glyphicon-log-out"></span> Log out
+        </button>
+</div>
+
+<!-- Sidenav/menu -->
+<nav class="w3-sidenav w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidenav"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col s4">
+      <img src="/images/Welcome.png" class="w3-circle w3-margin-right" style="width:46px">
+    </div>
+    <div class="w3-col s8">
+      <span>Welcome, <strong>User</strong></span><br>
+      
+    </div>
+  </div>
+  <hr>
+  <div class="w3-container">
+    <h5>Sentiment Analysis</h5>
+  </div>
+  <a href="#" class="w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+  <a href="main.html" class="w3-padding"><i class="fa fa-home fa-fw"></i>  Home</a>
+  <a href="Domains.html" class="w3-padding "><i class="fa fa-cloud fa-fw"></i>  Domains</a>
+  <a href="mobile.html" class="w3-padding w3-blue"><i class="fa fa-mobile fa-fw"></i>  Mobiles</a>
+  <a href="laptop.html" class="w3-padding"><i class="fa fa-laptop fa-fw"></i>  Laptops</a>
+  <a href="politic.html" class="w3-padding"><i class="fa fa-globe fa-fw"></i>  Movies</a>
+</nav>
+
+
+<!-- Overlay effect when opening sidenav on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:52px;">
+
+<h2 align="center" class="w3-center w3-animate-zoom"><b>Google Pixel</b></h2>
+ 
+<div class="w3-container">
+  	<label>Search Phone:</label>
+	<input type="text" name="query" id="query"/>
+	  	<button class="btn btn-primary btn-lg" id="btns" data-toggle="modal" data-target="#myModal">Show Results</button>
+	  	
+			 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			               <h4 class="modal-title" id="myModalLabel">Results</h4>
+			      </div>
+			      <div class="modal-body">
+			      <ul class="nav nav-tabs">
+			    <li class="active"><a data-toggle="tab" href="#popup1">Pie Chart</a></li>
+			    <li><a data-toggle="tab" href="#popup2">Bar Chart</a></li>
+			  </ul>
+			 <div class="tab-content">
+			    <div id="popup1" class="tab-pane fade in active">
+			      <p><div id="chart_div"></div></p>
+			    </div>
+			    <div id="popup2" class="tab-pane fade">
+			      <p><div id="chart_div1"></div></p>
+			    </div>
+			  </div>
+			      
+        <div id="chart_div" style="width: 900px; height: 200px;"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           </div>
+    </div>
+  </div>
+</div>
+
+	    <!-- Our Suggestions -->
+      <div class="w3-container w3-section">
+	<div class="w3-third w3-padding" style="margin-top:52px;">
+        <h1	 align="center"><b>Our Suggestions</b></h1>
+        <table class="w3-table w3-striped w3-white" style="margin-top:52px;">
+          <tr class="w3-padding w3-hover-grey" >
+            <td><i class="fa fa-user w3-blue w3-padding-medium"></i></td>
+            <td><a href="3t.html" class="w3-padding" style= "font-size: 25px; text-decoration:none">OnePlus 3T</a></td>
+            
+          </tr>
+          <tr class="w3-padding w3-hover-grey" >
+            <td><i class="fa fa-bell w3-red w3-padding-medium"></i></td>
+            <td><a href="7s.html" class="w3-padding" style= "font-size: 25px; text-decoration:none">IPhone 7S</a></td>
+            
+          </tr>
+          <tr class="w3-padding w3-hover-grey" >
+            <td><i class="fa fa-users w3-orange w3-text-white w3-padding-medium"></i></td>
+            <td><a href="s7.html" class="w3-padding" style= "font-size: 25px; text-decoration:none">Galaxy S7</a></td>
+            
+          </tr>
+          <tr class="w3-padding w3-hover-grey" >
+            <td><i class="fa fa-comment w3-red w3-padding-medium"></i></td>
+            <td><a href="pixel.html" class="w3-padding" style= "font-size: 25px; text-decoration:none">Google Pixel</a></td>
+            
+          </tr>
+          <tr class="w3-padding w3-hover-grey" >
+            <td><i class="fa fa-bookmark w3-light-blue w3-padding-medium w3-hover-blue "></i></td>
+            <td><a href="HTC.html" class="w3-padding" style= "font-size: 25px; text-decoration:none">HTC 10</a></td>
+          </tr>
+        </table>
+      </div>
+
+<div class="w3-twothird">
+<h5 align="center"><b>Sentiment Analysis</b></h5>
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Pie Chart</a></li>
+    <li><a data-toggle="tab" href="#menu1">Bar Chart</a></li>
+  </ul>
+ <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <p><div id="mydata"></div></p>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <p><div id="mydata1"></div></p>
+    </div>
+  </div>
+</div>
+  
+ <div class="w3-container w3-section">
+	<div class="w3-third w3-padding">
+	<H5 align ="center"><b>Google Pixel</b></H5>
+		 <img width="350px" img src="/images/pixel.jpg" align="center" >
+	</div>
+	<div class="w3-twothird">
+	<H5 align="center"><b>Specs</b></H5>
+		 <H5  align="center">Google Pixel XL smartphone was launched in October 2016. The phone comes with a 5.50-inch 
+		 touchscreen display with a resolution of 1440 pixels by 2560 pixels at a PPI of 534 pixels per inch. 
+		 Google Pixel XL price in India starts from Rs. 54,000.  </H5>
+		  
+		  <h5 align="center">The Google Pixel XL is powered by 1.6GHz quad-core Qualcomm Snapdragon 821 processor and 
+		  it comes with 4GB of RAM. The phone packs 32GB of internal storage cannot be expanded. As far as the cameras
+		   are concerned, the Google Pixel XL packs a 12.3-megapixel primary camera on the rear and a 8-megapixel front 
+		   shooter for selfies.</h5>
+
+			<h5 align="center">The Google Pixel XL runs Android 7.1 and is powered by a 3450mAh non removable battery. 
+			It measures 154.70 x 75.70 x 8.50 (height x width x thickness) and weigh 168.00 grams.</h5>		
+
+			<h5 align="center">The Google Pixel is a single SIM (GSM) smartphone that accepts a Nano-SIM.
+			 Connectivity options include Wi-Fi, GPS, Bluetooth, 3G and 4G (with support for Band 40 used by some
+			  LTE networks in India). Sensors on the phone include Compass Magnetometer, Proximity sensor, Accelerometer, 
+			  Ambient light sensor, Gyroscope and Barometer.</h5>
+	
+	
+	</div>
+</div>
+
+</div>
+
+    <!-- End page content -->
+</div>
+
+<script>
+// Get the Sidenav
+var mySidenav = document.getElementById("mySidenav");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidenav, and add overlay effect
+function w3_open() {
+    if (mySidenav.style.display === 'block') {
+        mySidenav.style.display = 'none';
+        overlayBg.style.display = "none";
+    } else {
+        mySidenav.style.display = 'block';
+        overlayBg.style.display = "block";
+    }
+}
+
+// Close the sidenav with the close button
+function w3_close() {
+    mySidenav.style.display = "none";
+    overlayBg.style.display = "none";
+}
+</script>
+</body>
+</html>
